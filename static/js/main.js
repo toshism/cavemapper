@@ -49,7 +49,7 @@ var UserList = React.createClass({
       console.log(this.props.data);
       var userNodes = this.props.data.map(function (user) {
           return (
-                  <User name={user.name} />
+                  <User name={user.username} />
           );
       });
       return (
@@ -64,17 +64,27 @@ var UserForm = React.createClass({
     handleSubmit: function(e) {
         e.preventDefault();
         var name = this.refs.name.getDOMNode().value.trim();
+        var password = this.refs.password.getDOMNode().value.trim();
+        var password2 = this.refs.password2.getDOMNode().value.trim();
+
         if (!name) {
+            console.log('blank name');
             return;
-        }
-        this.props.onFormSubmit({name: name});
+        };
+        if (password != password2) {
+            console.log('passwords dont match');
+            return;
+        };
+        this.props.onFormSubmit({name: name, password: password});
         this.refs.name.getDOMNode().value = '';
     },
     render: function() {
         return (
                 <div className="userForm">
                 <form method="post" onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Name..." ref="name" />
+                <input type="text" placeholder="Name..." ref="name" /><br />
+                <input type="password" placeholder="Password" ref="password" /><br />
+                <input type="password" placeholder="Again" ref="password2" /><br />
                 <input type="submit" />
                 </form>
                 </div>

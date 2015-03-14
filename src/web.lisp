@@ -4,9 +4,7 @@
         :caveman2
         :cavemapper.config
         :cavemapper.view
-        :cavemapper.db
-        :datafly
-        :sxql)
+        :cavemapper.models)
   (:export :*web*))
 (in-package :cavemapper.web)
 
@@ -29,16 +27,13 @@
     (render-json test)))
 
 (defroute ("/dbtest.json" :method :GET) ()
-  (render-json (with-connection (db)
-    (retrieve-all
-     (select :*
-       (from :users))))))
+  (render-json (get-all-users)))
 
 (defroute "/dbtest2.json" ()
   (render-json (get-user "tosh")))
 
 (defroute ("/dbtest.json" :method :POST) (&key _parsed)
-    (add-user (cdr (car _parsed)))
+    (add-user (cdar _parsed) (cdadr _parsed))
     (render-json (get-all-users)))
 
 ;; Error pages
@@ -47,24 +42,3 @@
   (declare (ignore app))
   (merge-pathnames #P"_errors/404.html"
                    *template-directory*))
-
-;;
-;; Data access stuff
-(defun get-user (name)
-  (with-connection (db)
-    (retrieve-one
-     (select :*
-       (from :users)
-       (where (:= :name name))))))
-
-(defun get-all-users ()
-  (with-connection (db)
-    (retrieve-all
-     (select :*
-       (from :users)))))
-
-(defun add-user (name)
-  (with-connection (db)
-    (execute
-     (insert-into :users
-       (set= :name name)))))
