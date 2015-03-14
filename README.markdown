@@ -5,10 +5,11 @@ Using caveman2 framework for the backend and react for the frontend.
 
 ## Usage
 These are really just for me.
+```
 ,cd ~/dev/projects/cavemapper
 (push (truename ".") asdf:*central-registry*)
 (ql:quickload '(cavemapper))
-
+```
 ## Installation
 
 ## Author
