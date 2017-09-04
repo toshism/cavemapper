@@ -21,9 +21,10 @@
   :components ((:module "src"
                 :components
                 ((:file "main" :depends-on ("config" "view" "db"))
-                 (:file "web" :depends-on ("view"))
+                 (:file "web" :depends-on ("view" "models"))
                  (:file "view" :depends-on ("config"))
                  (:file "db" :depends-on ("config"))
-                 (:file "config"))))
+                 (:file "config")
+                 (:file "models"))))
   :description ""
   :in-order-to ((test-op (load-op cavemapper-test))))

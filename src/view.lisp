@@ -4,9 +4,8 @@
   (:import-from :cavemapper.config
                 :*template-directory*)
   (:import-from :caveman2
-                :*response*)
-  (:import-from :clack.response
-                :headers)
+                :*response*
+                :response-headers)
   (:import-from :cl-emb
                 :*escape-type*
                 :*case-sensitivity*
