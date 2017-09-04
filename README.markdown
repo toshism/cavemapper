@@ -6,9 +6,9 @@ Using caveman2 framework for the backend and react for the frontend.
 ## Usage
 These are really just for me.
 ```
-,cd ~/dev/projects/cavemapper
-(push (truename ".") asdf:*central-registry*)
-(ql:quickload '(cavemapper))
+(pushnew (truename "/home/tosh/dev/projects/cavemapper") ql:*local-project-directories*)
+(ql:register-local-projects)
+(ql:quickload :cavemapper)
 ```
 ## Installation
 
